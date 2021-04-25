@@ -17,12 +17,12 @@
                 <div class="col col-11 mx-auto">
                     <div class="row bg-white justife-content-center">
                         <div class="col">
-                            <input type="text" name="task_name" maxlength="200"
+                            <input type="text" name="task_name" maxlength="200" required id="id_task_name"
                             class="form-control form-control-lg border-0 add-todo-input bg-transparent" placeholder="Add New......">
 
                         </div>
                         <div class="col-auto m-2 px-2 d-flex align-items-center">
-                            <input title="Set a due date" type="date" name="due date">
+                            <input title="Set a due date" type="date" name="due_date" id="id_due_date">
                         </div>
                         <div class="col-auto px-0 mx-0 mr-2">
                             <input type="submit" class="btn btn-primary" value="Add">
@@ -85,12 +85,12 @@
                     <td scope="rom">{{ task.priority }}</td>
                     <td scope="rom">{{ task.due_date }}</td>
                     <td scope="rom">
-                        {% if task.complted == "True" %}
+                        {% if task.completed == "True" %}
                         Done
                         {% else %}
-                        <a href="#">{{ task.status }}</a></td>
+                        <a class="link" href="#">Mark As Complete</a></td>
                     {% endif %}
-                    <td><a href="#"><i class="fa fa-edit text-primary"></i></a></td>
+                    <td><a href="{% url 'home:edit' task.id %}"><i class="fa fa-edit text-primary"></i></a></td>
                     <td><a href="#"><i class="fa fa-trash text-danger"></i></a></td>
                 </tr>
             {% endfor %}
