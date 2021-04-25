@@ -12,6 +12,7 @@
 
         <!--Create Form-->
         <form method="POST">
+            {% csrf_token %}
             <div class="row m-1 p-3">
                 <div class="col col-11 mx-auto">
                     <div class="row bg-white justife-content-center">
@@ -83,7 +84,12 @@
                     <td scope="rom">{{ task.task_name }}</td>
                     <td scope="rom">{{ task.priority }}</td>
                     <td scope="rom">{{ task.due_date }}</td>
-                    <td scope="rom"><a href="#">{{ task.status }}</a></td>
+                    <td scope="rom">
+                        {% if task.complted == "True" %}
+                        Done
+                        {% else %}
+                        <a href="#">{{ task.status }}</a></td>
+                    {% endif %}
                     <td><a href="#"><i class="fa fa-edit text-primary"></i></a></td>
                     <td><a href="#"><i class="fa fa-trash text-danger"></i></a></td>
                 </tr>
