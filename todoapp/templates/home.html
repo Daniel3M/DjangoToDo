@@ -1,0 +1,95 @@
+{% extends 'base.html' %}
+{% block content %}
+    <div class="container m-5 p-2 rounded mx-auto bg-light shadow">
+        <div class="row  m-1 p-4">
+            <div class="col">
+                <div class="h1 text-primary text-center display-inline-block">
+                    <i class="fa fa-check bg-primary text-white p-2"></i>
+                    <u>MY Todo-s</u>
+                </div>
+            </div>
+        </div>
+
+        <!--Create Form-->
+        <form method="POST">
+            <div class="row m-1 p-3">
+                <div class="col col-11 mx-auto">
+                    <div class="row bg-white justife-content-center">
+                        <div class="col">
+                            <input type="text" name="task_name" maxlength="200"
+                            class="form-control form-control-lg border-0 add-todo-input bg-transparent" placeholder="Add New......">
+
+                        </div>
+                        <div class="col-auto m-2 px-2 d-flex align-items-center">
+                            <input title="Set a due date" type="date" name="due date">
+                        </div>
+                        <div class="col-auto px-0 mx-0 mr-2">
+                            <input type="submit" class="btn btn-primary" value="Add">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+
+        <div class="p-2 mx-4 border-black-25 border-bottom"></div>
+
+        <!--Add task table-->
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Task</th>
+                    <th scope="col">
+                        <div class="dropdown">
+                            <button class="btn btn-primary dropdown-toggle" type="button"
+                            data-toggle="dropdown">
+                            Priority
+                            </button>
+                            <ul class="dropdown-menu">
+                                <li>
+                                    <a class="dropdown-item" href="#">ALL</a>
+                                    <a class="dropdown-item" href="#">Low</a>
+                                    <a class="dropdown-item" href="#">Medium</a>
+                                    <a class="dropdown-item" href="#">High</a>
+                                </li>
+
+                            </ul>
+                        </div>
+                    </th>
+                    <th scope="col">Due Date</th>
+                    <th scope="col">
+                        <div class="dropdown">
+                            <button class="btn btn-primary dropdown-toggle" type="button"
+                            data-toggle="dropdown">
+                            Status
+                            </button>
+                            <ul class="dropdown-menu">
+                                <li>
+                                    <a class="dropdown-item" href="#">ALL</a>
+                                    <a class="dropdown-item" href="#">Pending</a>
+                                    <a class="dropdown-item" href="#">Completed</a>
+                                </li>
+
+                            </ul>
+                        </div>
+                    </th>
+
+                </tr>
+            </thead>
+            <tbody>
+            {% for task in tasks %}
+                <tr>
+                    <td scope="rom">{{ forloop.counter }}</td>
+                    <td scope="rom">{{ task.task_name }}</td>
+                    <td scope="rom">{{ task.priority }}</td>
+                    <td scope="rom">{{ task.due_date }}</td>
+                    <td scope="rom"><a href="#">{{ task.status }}</a></td>
+                    <td><a href="#"><i class="fa fa-edit text-primary"></i></a></td>
+                    <td><a href="#"><i class="fa fa-trash text-danger"></i></a></td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+
+    </div>
+{% endblock %}
