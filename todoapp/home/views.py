@@ -28,3 +28,41 @@ def edit(request, id=id):
     form = UpdateForm(request.POST or None, instance=task)
     print(form)
     return render(request, 'edit.html', {'form': form})
+
+def completed(request, id=id):
+    task = Task.objects.get(id=id)
+    if task.completed != True:
+        task.completed = True
+        task.save()
+        return redirect('home:home')
+
+def delete(request, id=id):
+    task = Task.objects.get(id=id)
+    task.delete()
+    return redirect('home:home')
+
+def filter_priority(request, choice):
+    if request.method=='POST':
+        form = TaskForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('home:home')
+
+    tasks = Task.objects.filter(priority=choice)
+    #print(task.count())
+    form = TaskForm()
+    print(form)
+    return render(request, 'home.html', {'tasks': tasks, 'form': form})
+
+def filter_status(request, choice):
+    if request.method=='POST':
+        form = TaskForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('home:home')
+
+    tasks = Task.objects.filter(completed=choice)
+    #print(task.count())
+    form = TaskForm()
+    print(form)
+    return render(request, 'home.html', {'tasks': tasks, 'form': form})

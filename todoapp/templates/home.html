@@ -48,10 +48,10 @@
                             </button>
                             <ul class="dropdown-menu">
                                 <li>
-                                    <a class="dropdown-item" href="#">ALL</a>
-                                    <a class="dropdown-item" href="#">Low</a>
-                                    <a class="dropdown-item" href="#">Medium</a>
-                                    <a class="dropdown-item" href="#">High</a>
+                                    <a class="dropdown-item" href="{% url 'home:home' %}">ALL</a>
+                                    <a class="dropdown-item" href="{% url 'home:priority' 'L' %}">Low</a>
+                                    <a class="dropdown-item" href="{% url 'home:priority' 'M' %}">Medium</a>
+                                    <a class="dropdown-item" href="{% url 'home:priority' 'H' %}">High</a>
                                 </li>
 
                             </ul>
@@ -66,9 +66,9 @@
                             </button>
                             <ul class="dropdown-menu">
                                 <li>
-                                    <a class="dropdown-item" href="#">ALL</a>
-                                    <a class="dropdown-item" href="#">Pending</a>
-                                    <a class="dropdown-item" href="#">Completed</a>
+                                    <a class="dropdown-item" href="{% url 'home:home' %}">ALL</a>
+                                    <a class="dropdown-item" href="{% url 'home:status' 'False' %}">Pending</a>
+                                    <a class="dropdown-item" href="{% url 'home:status' 'True' %}">Completed</a>
                                 </li>
 
                             </ul>
@@ -85,13 +85,13 @@
                     <td scope="rom">{{ task.priority }}</td>
                     <td scope="rom">{{ task.due_date }}</td>
                     <td scope="rom">
-                        {% if task.completed == "True" %}
+                        {% if task.completed == True %}
                         Done
                         {% else %}
-                        <a class="link" href="#">Mark As Complete</a></td>
+                        <a class="link" href="{% url 'home:completed' task.id %}">Mark As Complete</a></td>
                     {% endif %}
                     <td><a href="{% url 'home:edit' task.id %}"><i class="fa fa-edit text-primary"></i></a></td>
-                    <td><a href="#"><i class="fa fa-trash text-danger"></i></a></td>
+                    <td><a href="{% url 'home:delete' task.id %}"><i class="fa fa-trash text-danger"></i></a></td>
                 </tr>
             {% endfor %}
             </tbody>
